@@ -56,10 +56,20 @@ function amazonAfilliateWidgetWidget_ajax_getSubCategories(){
 	$response = $amazonEcs->browseNodeLookup($_POST['aaww_post_category']);
 	$subcats = array();
 	$nodes = $response->BrowseNodes->BrowseNode->Children->BrowseNode;
+	print_r($response);
+	die();
+	return;
+	if($nodes){
 	foreach($nodes as $node){
 		array_push($subcats,array($node->Name=>$node->BrowseNodeId));
 	}
-	echo json_encode($subcats);
+	echo json_encode(array("status"=>"success","data"=>$subcats));
+	}else{
+		if($response->BrowseNodes->Request->Errors->Error->Message){
+			echo json_encode(array("status"=>"error","data"=>$response->BrowseNodes->Request->Errors->Error));
+		}
+		//print_r($response);
+	}
 	die();
 }
   
@@ -73,7 +83,25 @@ function amazonAfilliateWidgetWidget_init()
 {
   register_sidebar_widget(__('Amazon Affiliate Widget Widget'), 'widget_amazonAfilliateWidgetWidget');     
 }
+/*
+function amazonAfiliateWidgetWidget_save($post_id){  
+{  
+    // Bail if we're doing an auto save  
+    if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return; 
+	
+	if($_POST['aaww_post_category']!= 0 && (($_POST['aaww_subcategory']=='keyword' && $_POST['aaww_post_subcategory_kw'] > "")|| ($_POST['aaww_subcategory']=='category' && $_POST['aaww_post_subcategory_cat'] != 0))){
+		//update_post_meta($post_id,'aaww_post_category',$_POST['aaww_post_category']);
+		//update_post_meta($post_id,'aaww_subcategory',$_POST['aaww_subcategory']);
+	}
+	//aaww_post_category cat not 0
+	//aaww_subcategory kw vs cat
+	//update_post_meta( $post_id, 'my_meta_box_text'
+}
+*/
+
 add_action("plugins_loaded", "amazonAfilliateWidgetWidget_init");
 add_action('admin_menu', 'amazonAfilliateWidgetWidget_admin_actions'); 
 add_action('wp_ajax_aaww_getSubCategories', 'amazonAfilliateWidgetWidget_ajax_getSubCategories');
+//add_action('save_post','amazonAfiliateWidgetWidget_save');
+
 ?>

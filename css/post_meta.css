@@ -1,0 +1,10 @@
+#aaww_posts label.error{
+	color: red;
+	
+}
+
+#aaww_posts select[disabled], #aaww_posts input[disabled]{
+	color: #ccc;
+}
+
+
