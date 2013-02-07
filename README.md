@@ -5,6 +5,9 @@ Wordpress plugin for a widget for placing Amazon Associates Widgets, either rand
 and provide an easy admin within Wordpress to add various types of the Widgets available at: https://widgets.amazon.com/.  This plugin 
 and widget requires an Amazon Associates account (https://affiliate-program.amazon.com/) and AWS API keys.
 
+### Other Projects Used
+* https://github.com/Exeu/Amazon-ECS-PHP-Library
+
 ## Feature Overview
 * Currently only has Recommended Product Links, and Omakase widget
 * Ability to customize appearance of the widget
