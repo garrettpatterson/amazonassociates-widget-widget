@@ -16,11 +16,12 @@ jQuery(document).ready(function(){
 	
 	function aaww_getSubCategories(){
 		if(jQuery('#awww_post_category').val()!=0){
-		var data = {
-			'action':'aaww_getSubCategories',
-			'aaww_post_category':jQuery('#awww_post_category').val()
-		}
-		
+			var data = {
+				'action':'aaww_getSubCategories',
+				'aaww_post_category':jQuery('#awww_post_category').val()
+			}
+			jQuery('#aaww_post_subcategory_cat').children().remove()
+			jQuery('#aaww_subcategory_cat_label').toggleClass("progress");
 			jQuery.post(ajaxurl,data,function(response){
 				response = JSON.parse(response);
 				if(response.status=="success"){
@@ -32,19 +33,7 @@ jQuery(document).ready(function(){
 							jQuery('#aaww_post_subcategory_cat').append('<option value="'+v+'">'+k+'</option>');
 						});
 					});
+					jQuery('#aaww_subcategory_cat_label').toggleClass("progress");
 					jQuery("#aaww_error").text("");
 				}else{
-					jQuery("#aaww_error").text(response.data.Message);
-				}
-			});
-			}
-	}
-	
-	jQuery('#awww_post_category').change(function(){
-		if(jQuery('#aaww_subcategory_cat').attr('checked')=='checked'){
-			aaww_getSubCategories();
-		}
-		
-	});
-	
-});
+					jQuery('#aaww_subcategory_cat_label').toggleClass("pr
