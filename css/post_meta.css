@@ -7,4 +7,8 @@
 	color: #ccc;
 }
 
-#a
+#aaww_posts label.progress {
+	background: url('/wp-admin/images/wpspin_light.gif') no-repeat right center;
+	padding-right: 18px;
+	
+}
