@@ -36,4 +36,22 @@ jQuery(document).ready(function(){
 					jQuery('#aaww_subcategory_cat_label').toggleClass("progress");
 					jQuery("#aaww_error").text("");
 				}else{
-					jQuery('#aaww_subcategory_cat_label').toggleClass("pr
+					jQuery('#aaww_subcategory_cat_label').toggleClass("progress");
+					jQuery("#aaww_error").text(response.data.Message);
+				}
+			});
+			}
+	}
+	
+	jQuery('#awww_post_category').change(function(){
+		if(jQuery('#aaww_subcategory_cat').attr('checked')=='checked'){
+			aaww_getSubCategories();
+		}
+		
+		if(jQuery("#aaww_subcat").attr("disabled")){
+			jQuery("#aaww_subcat").removeAttr("disabled");
+		}
+		
+	});
+	
+});
