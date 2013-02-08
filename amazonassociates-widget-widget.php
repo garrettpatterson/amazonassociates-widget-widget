@@ -109,7 +109,7 @@ function widget_amazonAssociatesWidgetWidget($args) {
   
  function amazonAssociatesWidgetWidget_admin(){
  	
-	include('amazonaffiliate-widget-widget_admin.php');
+	include('amazonassociates-widget-widget_admin.php');
  }
  
  function amazonAffiliateWidgetWidget_posts($post){
@@ -167,14 +167,14 @@ function amazonAssociatesWidgetWidget_ajax_getSubCategories(){
   
  function amazonAssociatesWidgetWidget_admin_actions(){
  	add_options_page("AmazonAssociates Widget Widget", "AmazonAssociates Widget Widget", "manage_options", "aaww_admin", "amazonAssociatesWidgetWidget_admin");
- 	add_meta_box("aaww_posts","Amazon Associates Widget", "amazonAffiliateWidgetWidget_posts", "post","side", "low");
+ 	add_meta_box("aaww_posts","Amazon Associates Widget", "amazonAssociatesWidgetWidget_posts", "post","side", "low");
 
  }
  
 function amazonAssociatesWidgetWidget_init()
 {
-  register_sidebar_widget(__('Amazon Affiliate Widget Widget'), 'widget_amazonAssociatesWidgetWidget'); 
-  register_widget_control(__('Amazon Affiliate Widget Widget'), 'options_amazonAssociatesWidgetWidget');
+  register_sidebar_widget(__('Amazon Associates Widget Widget'), 'widget_amazonAssociatesWidgetWidget'); 
+  register_widget_control(__('Amazon Associates Widget Widget'), 'options_amazonAssociatesWidgetWidget');
 }
 
 
