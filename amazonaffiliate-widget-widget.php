@@ -9,14 +9,25 @@ Author URI: http://www.garrettpatterson.com/
 */
 global $product_categories;
 global $post;
+global $widgetsizes;
+
 require 'lib/AmazonECS.class.php';
 include 'data/product_categories.php';
+include 'data/widget_sizes.php';
 
 function amazonAfilliateWidgetWidget($post) 
 {
 	$values = array();
 	$affiliateid = get_option('aaww_affiliateid');
 	$widget = "";
+	
+	//blog plugin settings
+	$aaww_blog_display = get_option("aaww_blog_display");
+	$aaww_blog_category = get_option('aaww_category');
+	$blog_subcategory_mode = get_option('aaww_subcat_mode');
+	$blog_subcat_keyword =get_option('aaww_subcategory_kw');
+	$blog_subcat_category = get_option('aaww_subcategory_cat');
+	
 	if(count($post)==1){
 		//$values = get_post_meta($post->ID);
 		$aaww_category = get_post_meta($post->ID,'aaww_post_category',true);
@@ -26,7 +37,15 @@ function amazonAfilliateWidgetWidget($post)
 		
 	}
 	
-	if($aaww_category > ""){
+	if(count($post)==1 && empty($aaww_category)==true){
+		$aaww_category = $aaww_blog_category;
+		$subcategory_mode = $blog_subcategory_mode;
+		$subcat_keyword= $blog_subcat_keyword;
+		$subcat_category= $blog_subcat_category;
+	}
+	
+	
+	if($aaww_blog_display=="category" && empty($aaww_category)==false){
 		//do category one
 		$subq = "";
 		if($subcategory_mode=="category"){
@@ -63,13 +82,29 @@ function widget_amazonAfilliateWidgetWidget($args) {
   echo $after_widget;
 }
 
-  function form($instance)
+  function options_amazonAfilliateWidgetWidget()
   {
-    $instance = wp_parse_args( (array) $instance, array( 'title' => '' ) );
-    $title = $instance['title'];
-?>
-  <p><label for="<?php echo $this->get_field_id('title'); ?>">Title: <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo attribute_escape($title); ?>" /></label></p>
-<?php
+		$widgetsizes = array(
+			"6"=>"One Product, small, 120x150",
+			"8"=>"One Product, 120x240",
+			"10"=>"Six produts, top with image, 120x450",
+			"14"=>"Six products with images, 120x600"
+		);
+		$aaww_widget_display = get_option('aaww_widget_display');
+		echo '<input type="hidden" name="aaww_widget_options_postback" value="true" />';
+		echo '<select name="aaww_widget_display"><option value="0">--Select--</option>';
+		foreach($widgetsizes as $k=>$v){
+			$seleted = $k == $aaww_widget_display?" selected":"";
+			echo '<option value="'.$k.$seleted. '">'.$v.'</option>';
+			
+			
+		}
+		echo '</select>';
+		if($_POST['aaww_widget_options_postback']==true && $_POST['aaww_widget_display'] > 0){
+			update_option('aaww_widget_display',$_POST['aaww_widget_display']);
+			
+		}
+
   }
   
  function amazonAfilliateWidgetWidget_admin(){
@@ -138,7 +173,8 @@ function amazonAfilliateWidgetWidget_ajax_getSubCategories(){
  
 function amazonAfilliateWidgetWidget_init()
 {
-  register_sidebar_widget(__('Amazon Affiliate Widget Widget'), 'widget_amazonAfilliateWidgetWidget');     
+  register_sidebar_widget(__('Amazon Affiliate Widget Widget'), 'widget_amazonAfilliateWidgetWidget'); 
+  register_widget_control(__('Amazon Affiliate Widget Widget'), 'options_amazonAfilliateWidgetWidget');
 }
 
 

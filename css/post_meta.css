@@ -1,4 +1,4 @@
-#aaww_posts label.error{
+#aaww_posts label.error, #aaww_options_error, #aaww_error{
 	color: red;
 	
 }
@@ -7,8 +7,12 @@
 	color: #ccc;
 }
 
-#aaww_posts label.progress {
+#aaww_posts label.progress,#aaww_subcat label.progress  {
 	background: url('/wp-admin/images/wpspin_light.gif') no-repeat right center;
 	padding-right: 18px;
 	
+}
+
+#aaww_subcat[disabled] {
+	color: #ccc;
 }

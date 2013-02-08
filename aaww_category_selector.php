@@ -1,19 +1,14 @@
 <?php
 
 require 'data/product_categories.php';
+/*
 $awsaffiliate = get_option('aaww_affiliateid');
 $awsaccess = get_option('aaww_awsaccess');
 $awssecret = get_option('aaww_awssecret');
-
+*/
 wp_enqueue_script('aaww_post_meta_script', plugins_url('/js/post_meta.js', __FILE__),array('jquery'));
 wp_enqueue_style('aaww_post_meta_style',plugins_url('/css/post_meta.css', __FILE__));
-
-
-$aaww_category = get_post_meta($post->ID,'aaww_post_category',true);
-$subcategory_mode = get_post_meta($post->ID,'aaww_post_subcat_mode',true);
-$subcat_keyword =get_post_meta($post->ID,'aaww_post_subcategory_kw',true);
-$subcat_category = get_post_meta($post->ID,'aaww_post_subcategory_cat',true);
-
+$inpostlayouts = array("Banner - 3 product" =>"h3up","Banner - 2 product"=>"h2up");
 
 try
 {
@@ -22,13 +17,13 @@ try
 	    //echo print_r($product_categories);
 	    	//cho print_r($post);
 	    	echo "current post?:" .$post->ID;
-	    	echo "saved-cat:" . $aaww_category;
+	    	echo "saved-cat:" . empty($aaww_category)?"empty":"full";
 			echo "saved-mode:" . $subcategory_mode;
 			echo "saved-subcat:" . $subcat_category;
 			echo "saved-sbukey:" . $subcat_keyword;
 		echo "-->";
 		
-	?><p>Amazon Associates Widget Widget options</p>
+	?>
 	<label for="aaww_post_category">Select Product Line <span></span></label><br />
 	<select name="aaww_post_category" id="awww_post_category">
 		<option value="0">-- Select --</option>
@@ -40,7 +35,7 @@ try
 	?>
 	</select>
 	<br />-- THEN --<br />
-	<fieldset id="aaww_subcat" <?php echo $aaww_category > ""?"":'disabled="disabled"' ?>>
+	<fieldset id="aaww_subcat" <?php echo empty($aaww_category )==false?"":'disabled="disabled"' ?>>
 		<input type="radio" id="aaww_subcategory_kw" name="aaww_subcategory" value="keyword" <?php echo $subcategory_mode=="keyword"?"checked":"" ?> />
 		<label for="aaww_subcategory_kw">Enter keywords</label><br />
 		<input type="text" id="aaww_post_subcategory_kw" value="<?php echo $subcat_keyword ?>" size="40" name="aaww_post_subcategory_kw" <?php echo $subcategory_mode=="category"?"":' diabled="disabled"' ?> /><br />
