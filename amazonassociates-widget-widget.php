@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Amazon Affiliate Widget Widget
+Plugin Name: Amazon Associates Widget Widget
 Plugin URI: https://github.com/garrettpatterson/amazonassociates-widget-widget
 Description: Amazon Associates Widget Placements for displaying custom categories related to content or Okurt random
 Author: Garrett Patterson
