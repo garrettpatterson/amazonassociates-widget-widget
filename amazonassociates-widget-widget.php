@@ -37,7 +37,7 @@ function amazonAssociatesWidgetWidget($post)
 		
 	}
 	
-	if(count($post)==1 && empty($aaww_category)==true){
+	if(count($post)==1 &&($aaww_blog_display=="category" && empty($aaww_blog_category)==false)){
 		$aaww_category = $aaww_blog_category;
 		$subcategory_mode = $blog_subcategory_mode;
 		$subcat_keyword= $blog_subcat_keyword;
@@ -45,7 +45,7 @@ function amazonAssociatesWidgetWidget($post)
 	}
 	
 	
-	if($aaww_blog_display=="category" && empty($aaww_category)==false){
+	if(empty($aaww_category)==false){
 		//do category one
 		$subq = "";
 		if($subcategory_mode=="category"){
@@ -112,7 +112,7 @@ function widget_amazonAssociatesWidgetWidget($args) {
 	include('amazonassociates-widget-widget_admin.php');
  }
  
- function amazonAffiliateWidgetWidget_posts($post){
+ function amazonAssociatesWidgetWidget_posts($post){
  	include('aaww_posts_page.php');
  }
 
