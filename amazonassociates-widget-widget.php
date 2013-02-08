@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Amazon Affiliate Widget Widget
-Plugin URI: http://www.garrettpatterson.com/
-Description: Amazon Afilliate Widget Placements for displaying custom categories related to content or Okurt random
+Plugin URI: https://github.com/garrettpatterson/amazonassociates-widget-widget
+Description: Amazon Associates Widget Placements for displaying custom categories related to content or Okurt random
 Author: Garrett Patterson
 Version: 1
 Author URI: http://www.garrettpatterson.com/
@@ -15,7 +15,7 @@ require 'lib/AmazonECS.class.php';
 include 'data/product_categories.php';
 include 'data/widget_sizes.php';
 
-function amazonAfilliateWidgetWidget($post) 
+function amazonAssociatesWidgetWidget($post) 
 {
 	$values = array();
 	$affiliateid = get_option('aaww_affiliateid');
@@ -72,17 +72,17 @@ function amazonAfilliateWidgetWidget($post)
   echo $amzn;
 }
  
-function widget_amazonAfilliateWidgetWidget($args) {
+function widget_amazonAssociatesWidgetWidget($args) {
 	global $post;
   extract($args);
   echo $before_widget;
   echo $before_title;?>Amazon<?php echo $after_title;
   //echo "<!--" .print_r($post). "-->";
-  amazonAfilliateWidgetWidget($post);
+  amazonAssociatesWidgetWidget($post);
   echo $after_widget;
 }
 
-  function options_amazonAfilliateWidgetWidget()
+  function options_amazonAssociatesWidgetWidget()
   {
 		$widgetsizes = array(
 			"6"=>"One Product, small, 120x150",
@@ -107,7 +107,7 @@ function widget_amazonAfilliateWidgetWidget($args) {
 
   }
   
- function amazonAfilliateWidgetWidget_admin(){
+ function amazonAssociatesWidgetWidget_admin(){
  	
 	include('amazonaffiliate-widget-widget_admin.php');
  }
@@ -145,7 +145,7 @@ function getSubcategories($cat){
 	return $subcats;
 }
 
-function amazonAfilliateWidgetWidget_ajax_getSubCategories(){
+function amazonAssociatesWidgetWidget_ajax_getSubCategories(){
 	include 'data/product_categories.php';
 	
 	
@@ -165,20 +165,20 @@ function amazonAfilliateWidgetWidget_ajax_getSubCategories(){
 	die();
 }
   
- function amazonAfilliateWidgetWidget_admin_actions(){
- 	add_options_page("AmazonAfilliate Widget Widget", "AmazonAfilliate Widget Widget", "manage_options", "aaww_admin", "amazonAfilliateWidgetWidget_admin");
- 	add_meta_box("aaww_posts","Amazon Affiliate Widget", "amazonAffiliateWidgetWidget_posts", "post","side", "low");
+ function amazonAssociatesWidgetWidget_admin_actions(){
+ 	add_options_page("AmazonAssociates Widget Widget", "AmazonAssociates Widget Widget", "manage_options", "aaww_admin", "amazonAssociatesWidgetWidget_admin");
+ 	add_meta_box("aaww_posts","Amazon Associates Widget", "amazonAffiliateWidgetWidget_posts", "post","side", "low");
 
  }
  
-function amazonAfilliateWidgetWidget_init()
+function amazonAssociatesWidgetWidget_init()
 {
-  register_sidebar_widget(__('Amazon Affiliate Widget Widget'), 'widget_amazonAfilliateWidgetWidget'); 
-  register_widget_control(__('Amazon Affiliate Widget Widget'), 'options_amazonAfilliateWidgetWidget');
+  register_sidebar_widget(__('Amazon Affiliate Widget Widget'), 'widget_amazonAssociatesWidgetWidget'); 
+  register_widget_control(__('Amazon Affiliate Widget Widget'), 'options_amazonAssociatesWidgetWidget');
 }
 
 
-function amazonAfilliateWidgetWidget_save($post_id){
+function amazonAssociatesWidgetWidget_save($post_id){
 	if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE){
 		return;
 	}
@@ -202,8 +202,8 @@ function amazonAfilliateWidgetWidget_save($post_id){
 	
 }
 
-add_action("plugins_loaded", "amazonAfilliateWidgetWidget_init");
-add_action('admin_menu', 'amazonAfilliateWidgetWidget_admin_actions'); 
-add_action('wp_ajax_aaww_getSubCategories', 'amazonAfilliateWidgetWidget_ajax_getSubCategories');
-add_action('save_post', 'amazonAfilliateWidgetWidget_save');
+add_action("plugins_loaded", "amazonAssociatesWidgetWidget_init");
+add_action('admin_menu', 'amazonAssociatesWidgetWidget_admin_actions'); 
+add_action('wp_ajax_aaww_getSubCategories', 'amazonAssociatesWidgetWidget_ajax_getSubCategories');
+add_action('save_post', 'amazonAssociatesWidgetWidget_save');
 ?>

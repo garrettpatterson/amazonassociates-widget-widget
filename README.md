@@ -10,6 +10,8 @@ and widget requires an Amazon Associates account (https://affiliate-program.amaz
 
 ## Feature Overview
 * Currently only has Recommended Product Links, and Omakase widget
+	* Both these widgets rely on iframes for display
+	* I don't want to try and reverse engineer any of the JS widgets or re-create some kind of custom widget.
 * Ability to customize appearance of the widget
 	* currently only supports the 120px wide formats
 	* Change layout from 1 product, to many, with and without pictures.
@@ -30,7 +32,7 @@ and widget requires an Amazon Associates account (https://affiliate-program.amaz
 2. Configure plugin display behavior
 	* Omakase or global Product Category for Blog
 3. Add Widget to Sidebar
-	* Select display size
+	* Select display size (TODO)
 4. Update posts with Amazon Category and keywords or subcategory
 
 ## Widget Display Decisioning
